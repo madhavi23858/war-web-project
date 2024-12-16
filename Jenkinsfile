@@ -8,11 +8,11 @@ pipeline {
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "3.109.133.197:8081"
+        NEXUS_URL = "43.205.233.59:8081"
         NEXUS_REPOSITORY = "demo-release"
         NEXUS_CREDENTIAL_ID = "nexus_credentials"
         ARTVERSION = "1.0.0"
-        TOMCAT_URL = "http://43.204.147.153:8080"
+        TOMCAT_URL = "http://13.126.128.217:8080"
         TOMCAT_CREDENTIAL_ID = "tomcat_credentials"
         TOMCAT_USERNAME = "tomcat-user"
         TOMCAT_PASSWORD = "secure-password" // Update this to the correct password
@@ -62,10 +62,10 @@ pipeline {
                         // Deploy the WAR file to the remote server
                         sh """
                             # Copy the WAR file to a temporary directory on the remote server
-                            scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/jenkins_key ${warFilePath} ubuntu@43.204.147.153:/tmp/wwp.war
+                            scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/jenkins_key ${warFilePath} ubuntu@13.126.128.217:/tmp/wwp.war
 
                             # Move the WAR file to the correct directory and restart Tomcat
-                            ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/jenkins_key ubuntu@43.204.147.153 <<EOF
+                            ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/jenkins_key ubuntu@13.126.128.217 <<EOF
                                 set -e
                                 echo "Moving WAR file to Tomcat directory..."
                                 sudo mv /tmp/wwp.war /opt/tomcat/webapps/wwp.war
